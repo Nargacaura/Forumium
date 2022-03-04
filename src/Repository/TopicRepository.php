@@ -62,6 +62,14 @@ class TopicRepository extends ServiceEntityRepository
     }
     */
 
+    public function findAllSorted()
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.creation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Topic
     {

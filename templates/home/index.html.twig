@@ -9,12 +9,15 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Bienvenue!</h1>
 
-    This friendly message is coming from:
+    <h2>Topics récents</h2>
     <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/DevInfo/CCI/Forum/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/DevInfo/CCI/Forum/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
+        {% for topic in topics %}
+            <li><a href="{{ path('app_topic', {id: topic.id}) }}"><h3>{{ topic.titre }}</h3></a>
+            <h5>par {{ topic.auteur.username }}</h5>
+            <p>{{ topic.description }}</p></li>
+        {% endfor %}    
     </ul>
 </div>
 {% endblock %}
