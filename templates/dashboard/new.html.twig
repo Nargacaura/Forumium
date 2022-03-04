@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<h1>Nouveau topic</h1>
+{{ form_start(newTopicForm) }}
+    {{ form_row(newTopicForm.titre) }}
+    {{ form_row(newTopicForm.description) }}
+    <button type="submit" class="btn">Créer</button>
+{{ form_end(newTopicForm) }}
+
+{% endblock %}

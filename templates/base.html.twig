@@ -21,7 +21,7 @@
             {% if app.user is null %}
                 <a href="{{ path('app_register') }}">Inscription</a> &middot; <a href="{{ path('app_login') }}">Connexion</a>
             {% else %}
-                <a href="">Tableau de bord</a> &middot; <a href="{{ path('app_logout') }}">Déconnexion</a>
+                <a href="{{ path('app_dashboard') }}">Tableau de bord</a> &middot; <a href="{{ path('app_logout') }}">Déconnexion</a>
             {% endif %}
             </nav>
         </header>

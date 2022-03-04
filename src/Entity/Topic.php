@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TopicRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -37,6 +38,8 @@ class Topic
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
+        $this->setCreation(new DateTime('now'));
+        $this->setMiseAJour(new DateTime('now'));
     }
 
     public function getId(): ?int
