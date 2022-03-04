@@ -46,4 +46,40 @@ class DashboardController extends AbstractController
             'newTopicForm' => $form->createView()
         ]);
     }
+
+    #[Route('/edit/{id}', name: 'edit_topic')]
+    public function editTopic(int $id, TopicRepository $topics, Request $rq, EntityManagerInterface $manager): Response
+    {
+        $topic = $topics->findOneBy(['id' => $id]);
+        $form = $this->createForm(NewTopicType::class);
+        
+        $form->get('titre')->setData($topic->getTitre());
+        $form->get('description')->setData($topic->getDescription());
+        $form->handleRequest($rq);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            $topic->setTitre($form->get('titre')->getData());
+            $topic->setDescription($form->get('description')->getData());
+            $topic->setAuteur($this->getUser());
+
+            $manager->persist($topic);
+            $manager->flush();
+
+            return $this->redirectToRoute('app_dashboard');
+        }
+
+        return $this->render('dashboard/new.html.twig', [
+            'newTopicForm' => $form->createView()
+        ]);
+    }
+
+    #[Route('', name: 'delete_topic', methods: 'DELETE')]
+    public function deleteTopic(Topic $topic, EntityManagerInterface $manager, Request $rq)
+    {
+        if($this->isCsrfTokenValid('delete' . $topic->getId(), $rq->get('_token'))) {
+            $manager->remove($topic);
+            $manager->flush();
+        }
+        return $this->redirectToRoute('app_dashboard');
+    }
 }

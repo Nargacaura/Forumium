@@ -15,7 +15,12 @@
     <a href="{{ path('new_topic') }}" type="button">Nouveau topic</a>
     <ul>
     {% for topic in topics %}
-        <li><h3>{{ topic.titre }}</h3></li>
+        <li><h3>{{ topic.titre }}</h3><a type="button" href="{{ path('edit_topic', {id: topic.id}) }}">Editer</a>
+        <form method="post" action="#" onsubmit="return confirm('Voulez-vous VRAIMENT supprimer ce topic? Plus personne ne pourra s'aider de votre topic...')">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ topic.id) }}">
+            <button>Supprimer</button>
+        </form>
     {% endfor %}
     </ul>
 </div>
