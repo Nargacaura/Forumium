@@ -13,7 +13,18 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
     <body>
+        <header>
+            <nav>
+            <a href="{{ path('app_home') }}">Accueil</a> &middot;
+            {% if app.user is null %}
+                <a href="{{ path('app_register') }}">Inscription</a> &middot; <a href="{{ path('app_login') }}">Connexion</a>
+            {% else %}
+                <a href="">Tableau de bord</a> &middot; <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% endif %}
+            </nav>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
