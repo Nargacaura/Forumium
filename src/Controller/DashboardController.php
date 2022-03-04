@@ -73,7 +73,7 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    #[Route('', name: 'delete_topic', methods: 'DELETE')]
+    #[Route('/topic/{id}', name: 'delete_topic', methods: 'POST')]
     public function deleteTopic(Topic $topic, EntityManagerInterface $manager, Request $rq)
     {
         if($this->isCsrfTokenValid('delete' . $topic->getId(), $rq->get('_token'))) {

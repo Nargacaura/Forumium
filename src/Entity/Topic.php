@@ -32,7 +32,7 @@ class Topic
     #[ORM\JoinColumn(nullable: false)]
     private $auteur;
 
-    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Reponse::class)]
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Reponse::class, cascade: ['remove'])]
     private $reponses;
 
     public function __construct()

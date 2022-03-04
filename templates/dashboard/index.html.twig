@@ -13,7 +13,7 @@
     <form action="{{ path('edit_topic', {id: topic.id}) }}">
         <button>Editer</button>
     </form>
-    <form method="post" action="#" onsubmit="return confirm('Voulez-vous VRAIMENT supprimer ce topic? Plus personne ne pourra s'aider de votre topic...')">
+    <form method="post" action="{{ path('delete_topic', {id: topic.id}) }}" onsubmit="return confirm('Voulez-vous VRAIMENT supprimer ce topic? Plus personne ne pourra s'aider de votre topic...')">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ topic.id) }}">
         <button>Supprimer</button>
