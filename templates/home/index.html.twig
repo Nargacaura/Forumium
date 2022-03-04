@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Forumium{% endblock %}
 
 {% block body %}
     <h1>Bienvenue!</h1>
@@ -13,4 +13,8 @@
             <p>{{ topic.description }}</p></li>
         {% endfor %}    
     </ul>
+
+    <div class="pagination">
+        {{ knp_pagination_render(topics)}}
+    </div>
 {% endblock %}

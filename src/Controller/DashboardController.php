@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Topic;
 use App\Form\NewTopicType;
 use App\Repository\TopicRepository;
-use App\Repository\UtilisateurRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     #[Route('/dashboard', name: 'app_dashboard')]
-    public function index(TopicRepository $topics): Response
+    public function index(TopicRepository $topics, PaginatorInterface $pagination, Request $rq): Response
     {
         
-        $topic = $topics->findBy(['auteur' => $this->getUser()]);
+        $topic = $pagination->paginate($topics->findBy(['auteur' => $this->getUser()]), $rq->query->getInt('page', 1), 12);
         return $this->render('dashboard/index.html.twig', [
             'topics' => $topic
         ]);
