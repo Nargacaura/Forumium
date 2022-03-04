@@ -2,13 +2,13 @@
 
 {% block body %}
 <h1>Recherche</h1>
-
+<h3>Que voulez-vous rechercher?</h3>
 {{form_start(TopicSearch)}}
     {{form_row(TopicSearch.titre)}}
     <button type="submit">Rechercher</button>
 {{form_end(TopicSearch)}}
 
-{% if results is not null %}<h2>Résultats pour {{ results }}</h2>{% endif %}
+{% if results is not null %}<h2>Résultats pour "{{ results }}"</h2>{% endif %}
 <ul>
     {% for topic in topics %}
         <li><a href="{{ path('app_topic', {id: topic.id}) }}"><h3>{{ topic.titre }}</h3></a>

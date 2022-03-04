@@ -17,14 +17,17 @@
     <body>
         <header>
             <nav>
-            <a href="{{ path('app_home') }}">Accueil</a> &middot;
+            <h2 class="name">Forumium</h2>
+            <p class="navigation"><a href="{{ path('app_home') }}">Accueil</a> &middot; <a href="{{ path('search_topics') }}">Rechercher</a> &middot;
             {% if app.user is null %}
                 <a href="{{ path('app_register') }}">Inscription</a> &middot; <a href="{{ path('app_login') }}">Connexion</a>
             {% else %}
                 <a href="{{ path('app_dashboard') }}">Tableau de bord</a> &middot; <a href="{{ path('app_logout') }}">Déconnexion</a>
-            {% endif %}
+            {% endif %}</p>
             </nav>
         </header>
-        {% block body %}{% endblock %}
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

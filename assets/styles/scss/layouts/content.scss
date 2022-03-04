@@ -1,0 +1,50 @@
+.content {
+    width: 75%;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    
+    ul {
+        width: 90%;
+        list-style-type: none;
+        li {
+            border-bottom: 2px solid #eee;
+            margin-left: -1%;
+        }
+    }
+
+    p {
+        width: 90%;
+    }
+}
+
+.content form {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: auto;
+
+    div {
+        width: 90%;
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        margin-bottom: 1%;
+
+        input, textarea {
+            width: 80%;
+            border-radius: 20px;
+            padding-left: 1%;
+            padding-right: 1%;
+        }
+    }
+
+    button {
+        border-radius: 20px;
+        background-color: steelblue;
+        color: white;
+    }
+}

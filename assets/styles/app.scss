@@ -1,0 +1,11 @@
+@import "./scss/layouts/navbar.scss";
+@import "./scss/layouts/content.scss";
+@import "./scss/components/h.scss";
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    padding-top: 4%;
+}

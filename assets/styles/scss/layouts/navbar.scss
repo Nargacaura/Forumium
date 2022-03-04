@@ -1,0 +1,18 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: lightsteelblue;
+}
+
+nav {
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+nav p {
+    margin: 1%;
+}
