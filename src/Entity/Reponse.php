@@ -29,6 +29,8 @@ class Reponse
     #[ORM\ManyToMany(targetEntity: Note::class, mappedBy: 'reponse')]
     private $notes;
 
+    private $noteGlobale;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
@@ -100,5 +102,23 @@ class Reponse
         }
 
         return $this;
+    }
+
+    public function getNoteGlobale(): ?int
+    {
+        return $this->noteGlobale;
+    }
+
+    public function setNoteGlobale()
+    {
+        $i = 0;
+        $this->noteGlobale = 0;
+        $notes = $this->getNotes();
+        while($notes[$i]) {
+            $this->noteGlobale += $notes[$i]->getEstUtile()? 1:0;
+            $i++;
+        }
+
+        $this->noteGlobale = $this->noteGlobale;
     }
 }

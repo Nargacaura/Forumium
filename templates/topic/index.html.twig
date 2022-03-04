@@ -13,5 +13,21 @@
     <h3>ajouté le {{ topic.creation|date("d.m.Y") }} par {{ topic.auteur.username }}</h3>
 
     <p>{{ topic.description }}</p>
+
+    <h2>Réponses</h2>
+    {% if app.user %}
+    {{ form_start(ReponseForm) }}
+        {{ form_row(ReponseForm.contenu) }}
+        <button type="submit">Envoyer</button>
+    {{ form_end(ReponseForm) }}
+    {% endif %}
+
+    {% for reponse in reponses %}
+        <hr>
+        <h5>{{ reponse.auteur.username }}</h5>
+        <p>{{ reponse.contenu }}</p>
+        <p><small>Note: {% if reponse.noteGlobale is null %}N/A{% else %}{{ reponse.noteGlobale }}{% endif %}</small></p>
+        {% if app.user %}<p>Cette réponse a-t-elle été utile? <a href="{{ path('useful', {id: reponse.id}) }}">Oui</a> &middot; <a href="{{ path('useless', {id: reponse.id}) }}">Non</a></p>{% endif %}
+    {% endfor %}
 </div>
 {% endblock %}
