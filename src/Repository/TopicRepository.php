@@ -70,6 +70,16 @@ class TopicRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findContaining(String $query)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.titre like :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->orderBy('t.creation', 'desc')
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Topic
     {

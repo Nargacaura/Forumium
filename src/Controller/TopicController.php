@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Note;
 use App\Entity\Reponse;
 use App\Form\ReponseType;
+use App\Form\TopicSearchType;
 use App\Repository\ReponseRepository;
 use App\Repository\TopicRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TopicController extends AbstractController
 {
-    #[Route('/topic/{id}', name: 'app_topic')]
+    #[Route('/topic/details/{id}', name: 'app_topic')]
     public function index(int $id, TopicRepository $topics, Request $rq, EntityManagerInterface $manager, ReponseRepository $reponses): Response
     {
         $topic = $topics->findOneBy(['id' => $id]);
@@ -75,5 +76,31 @@ class TopicController extends AbstractController
         $reponse->setNoteGlobale();
         $topic = $reponse->getTopic();
         return $this->redirectToRoute('app_topic', ['id' => $topic->getId()]);
+    }
+
+    #[Route('topic/search/{query?}', name: 'search_topics')]
+    public function search(?String $query, TopicRepository $topics, Request $rq)
+    {
+        $form = $this->createForm(TopicSearchType::class);
+        $form->handleRequest($rq);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $query = $form->getData()->getTitre();
+            $results = $topics->findContaining($query);
+
+            return $this->render('topic/search.html.twig', [
+                'query' => $query,
+                'results' => $query,
+                'TopicSearch' => $form->createView(),
+                'topics' => $results
+            ]);
+        } else {
+            $results = $topics->findAllSorted();
+            return $this->render('topic/search.html.twig', [
+                'results' => null,
+                'TopicSearch' => $form->createView(),
+                'topics' => $results
+            ]);
+        }   
     }
 }
