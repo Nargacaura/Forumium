@@ -43,7 +43,7 @@ class TopicController extends AbstractController
         ]);
     }
 
-    #[Route('replies/useful/{id}', name: 'useful')]
+    #[Route('topic/details/{id}', name: 'useful')]
     public function isUseful(int $id, ReponseRepository $reponses)
     {
         $reponse = $reponses->findOneBy(['id' => $id]);
@@ -60,7 +60,7 @@ class TopicController extends AbstractController
         return $this->redirectToRoute('app_topic', ['id' => $topic->getId()]);
     }
 
-    #[Route('replies/useless/{id}', name: 'useless')]
+    #[Route('topic/details/{id}', name: 'useless')]
     public function isUseless(int $id, ReponseRepository $reponses)
     {
         $reponse = $reponses->findOneBy(['id' => $id]);

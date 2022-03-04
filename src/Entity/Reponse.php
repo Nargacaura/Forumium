@@ -109,7 +109,7 @@ class Reponse
         return $this->noteGlobale;
     }
 
-    public function setNoteGlobale()
+    public function setNoteGlobale(): self
     {
         $i = 0;
         $this->noteGlobale = 0;
@@ -119,6 +119,6 @@ class Reponse
             $i++;
         }
 
-        $this->noteGlobale = $this->noteGlobale;
+        return $this;
     }
 }
